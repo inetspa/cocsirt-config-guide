@@ -66,7 +66,7 @@ ServerSignature Off
 expose_php = Off
 ```
 
-### 📋 ปิดช่องโหว่ Apache CipherSuit strenght และ TLS version
+### 📋 ปิดช่องโหว่ Apache CipherSuit strenght และ TLS version (Weak Cipher, SWEET32, BLEED)
 เพิ่ม configuration ในไฟล์ `/etc/httpd/conf/httpd.conf`
 ```
 # HTTPS Strength Config
@@ -124,7 +124,11 @@ sudo ifconfig
 - [SSL LAB](https://www.ssllabs.com/ssltest/) ควรจะต้องอยู่ในระดับ A ขึ้นไป
 - [Security Header](https://securityheaders.com/) ควรต้องอยู่ในระดับ A ขึ้น (หากเป็นไปได้)
 
-### 📋 การแก้ปัญหา Ciphersuite และ Hash algorithm ของ Windows Server, IIS, MSSQL
+### 📋 การแก้ปัญหา Ciphersuite และ Hash algorithm ของ Windows Server, IIS, MSSQL (SWEET32)
 ให้ทำการแก้ไขที่ Registry ของ OS
-// TODO:
+1. เปิด `Registry Editor` โดยใช้คำสั่ง `regedit`
+2. ไปที่ `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\Triple DES 168`
+3. ถ้าไม่มี key นี้ก็ให้สร้าง key โดยการ Click ขวา ที่ `SCHANNEL` เลือก `New -> Key` และตั้งชื่อว่า `Triple DES 168` 
+4. สร้าง `DWORD` ที่ชื่อว่า `Enabled` และตั้งค่าเป็น `0`
 
+![Windows Registry](windwos_sweet32.png "SWEET32")
