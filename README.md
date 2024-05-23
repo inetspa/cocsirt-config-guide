@@ -8,11 +8,11 @@
     - Red Hat จะประกอบไปด้วย Red Hat, CentOS, Almalinux, Rocky Linux
 
 ### สารบัญ
-- [Password Management](https://github.com/inetspa/cocsirt-config-guide/tree/main/PasswordManagement)
-- [User Access Management](https://github.com/inetspa/cocsirt-config-guide/tree/main/UserAccessManagement)
-- [Multi-factor authentication](https://github.com/inetspa/cocsirt-config-guide/tree/main/MultiFactorAuth)
-- [Web Server](https://github.com/inetspa/cocsirt-config-guide/tree/main/WebServer)
-- [Troubleshoot](https://github.com/inetspa/cocsirt-config-guide/tree/main/troubleshoot.md)
+- [Password Management](PasswordManagement)
+- [User Access Management](UserAccessManagement)
+- [Multi-factor authentication](MultiFactorAuth)
+- [Web Server](WebServer)
+- [Troubleshoot](troubleshoot.md)
 
 ### อัพเดท
 - v0.0.0 / 15-May-2024 Initialize project

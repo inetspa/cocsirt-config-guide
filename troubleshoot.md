@@ -43,13 +43,13 @@ sudo yum update --nogpgcheck
 ```
 
 ### 📋 Recommend Apache2 configuration
-[Config](https://github.com/inetspa/cocsirt-config-guide/blob/main/WebServer/apache-recommended-config.md)
+[Config](WebServer/apache-recommended-config.md)
 
 ### 📋 การติดตั้ง XAMP บน AlmaLinux
-[XAMP](https://github.com/inetspa/cocsirt-config-guide/blob/main/WebServer/install-xamp-alma9.md)
+[XAMP](WebServer/install-xamp-alma9.md)
 
 ### การติดตั้ง NGINX 1.26.0
-[NGINX 1.26.0](https://github.com/inetspa/cocsirt-config-guide/blob/main/WebServer/nginx-1.26-install.md)
+[NGINX 1.26.0](WebServer/nginx-1.26-install.md)
 
 ### 📋 ปิดช่องโหว่ Apache version (httpd hardening)
 เพิ่ม config เพื่อปิดไม่ให้แสดง version ของ httpd ในไฟล์ `/etc/httpd/conf/httpd.conf`
