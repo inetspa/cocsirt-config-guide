@@ -131,4 +131,4 @@ sudo ifconfig
 3. ถ้าไม่มี key นี้ก็ให้สร้าง key โดยการ Click ขวา ที่ `SCHANNEL` เลือก `New -> Key` และตั้งชื่อว่า `Triple DES 168` 
 4. สร้าง `DWORD` ที่ชื่อว่า `Enabled` และตั้งค่าเป็น `0`
 
-![Windows Registry](windwos_sweet32.png "SWEET32")
+![Windows Registry](assets/windows_sweet32.png "SWEET32")
