@@ -1,6 +1,6 @@
 # รวบรวม KB เกี่ยวกับการแก้ไขปัญหาหน้างาน
 
-### ไม่สามารถ Resolve name ได้
+### 📋 ไม่สามารถ Resolve name ได้
 ให้ตรวจสอบไฟล์ `/etc/resolve.conf` ว่ามีสร้างไว้ หรือไม่ตั้งค่า nameserver ไว้หรือยัง หากยังก็ให้เพิ่มเข้าไปดังนี้
 ```
 # Google DNS
@@ -9,13 +9,13 @@ nameserver 8.8.8.8
 nameserver 1.1.1.1
 ```
 
-### Firewall Fortigate 120G Config NAT แล้วใช้งานไม่ได้
+### 📋 Firewall Fortigate 120G Config NAT แล้วใช้งานไม่ได้
 กรณีนี้จะเจอมีการเปิด Central NAT ไว้แล้ว ได้ทำการ Config NAT แล้วไม่สามารถใช้งานได้
 ให้ลองเพิ่ม Source Interface ทั้ง Interface Public, Interface Private ไว้ใน Rule
 ก็จะสามารถทำให้ Policy สามารถใช้งานได้
 
 
-### Update AlmaLinux แล้วเจอปัญหา GPG Invalid หรือไม่ถูก สามารถ bypass ชั่วคราวได้
+### 📋 Update AlmaLinux แล้วเจอปัญหา GPG Invalid หรือไม่ถูก สามารถ bypass ชั่วคราวได้
 สามารถ Bypass gpg check ผ่านการรัน yum ในแต่ละครั้งได้โดยใช้ parameter ว่าอ `--nogpgcheck`
 ```
 sudo yum update --nogpgcheck
@@ -26,7 +26,7 @@ sudo yum update --nogpgcheck
 และปิดตรงหัวข้อ `gpgcheck` ให้เป็น `0` ใน repo ที่ enable ไว้
 
 
-### ไม่สามารถ Update CentOS8 ได้ หรือ Update CentOS8 แล้ว ไม่สามารถ Update ได้อีก
+### 📋 ไม่สามารถ Update CentOS8 ได้ หรือ Update CentOS8 แล้ว ไม่สามารถ Update ได้อีก
 เนื่องจาก CentOS8 หยุดการ Support ไปแล้ว ทำให้ Repository location ปิดไป ให้เข้าไป เปลี่ยนจาก
 `http://mirror.centos.org` เป็น `http://vault.centos.org`
 
@@ -42,16 +42,16 @@ sudo yum update --nogpgcheck
 /etc/yum.repo.d/CentOS-Extra.repo
 ```
 
-### Recommend Apache2 configuration
+### 📋 Recommend Apache2 configuration
 [Config](https://github.com/inetspa/cocsirt-config-guide/blob/main/WebServer/apache-recommended-config.md)
 
-### การติดตั้ง XAMP บน AlmaLinux
+### 📋 การติดตั้ง XAMP บน AlmaLinux
 [XAMP](https://github.com/inetspa/cocsirt-config-guide/blob/main/WebServer/install-xamp-alma9.md)
 
 ### การติดตั้ง NGINX 1.26.0
 [NGINX 1.26.0](https://github.com/inetspa/cocsirt-config-guide/blob/main/WebServer/nginx-1.26-install.md)
 
-### ปิดช่องโหว่ Apache version (httpd hardening)
+### 📋 ปิดช่องโหว่ Apache version (httpd hardening)
 เพิ่ม config เพื่อปิดไม่ให้แสดง version ของ httpd ในไฟล์ `/etc/httpd/conf/httpd.conf`
 ```
 # Hide version for security reason
@@ -59,14 +59,14 @@ ServerTokens Prod
 ServerSignature Off
 ```
 
-### ปิดช่องโหว่ของ PHP Version (php hardening)
+### 📋 ปิดช่องโหว่ของ PHP Version (php hardening)
 แก้ไขไฟล์ `/etc/php.ini` เพื่อปิดไม่ให้ php แสดง version ไปผ่านหน้าเว็บ
 ```
 # แก้ไข expose_php จาก On ให้เป็น Off
 expose_php = Off
 ```
 
-### ปิดช่องโหว่ Apache CipherSuit strenght และ TLS version
+### 📋 ปิดช่องโหว่ Apache CipherSuit strenght และ TLS version
 เพิ่ม configuration ในไฟล์ `/etc/httpd/conf/httpd.conf`
 ```
 # HTTPS Strength Config
@@ -77,7 +77,7 @@ SSLSessionTickets   off
 SSLCipherSuite EECDH:EDH:!NULL:!SSLv2:!RC4:!aNULL:!3DES:!IDEA:!SHA1:!SHA256:!SHA384
 ```
 
-### เพิ่ม Security header ของ apache เพื่อป้องกันการโจมตี XSS และ IFrame
+### 📋 เพิ่ม Security header ของ apache เพื่อป้องกันการโจมตี XSS และ IFrame
 เพิ่ม configuration ในไฟล์ `/etc/httpd/conf/httpd.conf`
 ```
 # Security Header
@@ -87,14 +87,14 @@ Header always set X-Content-Type-Options "nosniff"
 Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
 ```
 
-### Enable Http/2.0 ให้กับ Apache
+### 📋 Enable Http/2.0 ให้กับ Apache
 เพิ่ม code นี้ในไฟล์ `/etc/httpd/conf/httpd.conf`
 ```
 # Enable HTTP/2
 Protocols h2 http/1.1
 ```
 
-### คำสั่งสำหรับ update os linux
+### 📋 คำสั่งสำหรับ update os linux
 - สำหรับ Ubuntu, Debian
 ```
 sudo apt update
@@ -109,22 +109,22 @@ sudo yum update -y
 sudo yum udpate --security -y
 ```
 
-### คำสั่งสำหรับตรวจสอบ Port ที่เปิดไว้ในเครื่อง และ Process ที่ใช้ Port นั้นอยู่
+### 📋 คำสั่งสำหรับตรวจสอบ Port ที่เปิดไว้ในเครื่อง และ Process ที่ใช้ Port นั้นอยู่
 ```
 sudo netstat -lnp
 ```
 
-### คำสั่งสำหรับตรวจสอบ Interface ของเครื่อง Linux
+### 📋 คำสั่งสำหรับตรวจสอบ Interface ของเครื่อง Linux
 ```
 sudo ifconfig
 ```
 *หากไม่สามารถใช้งานได้ ให้ลอง Install `sudo yum install net-tools` หรือถ้าใช้ Ubuntu ก็ใช้คำสั่ง `sudo apt install net-tools`
 
-### Web สำหรับตรวจสอบ HTTPS และ Security ต่างๆ ที่น่าสนใจ
+### 📋 Web สำหรับตรวจสอบ HTTPS และ Security ต่างๆ ที่น่าสนใจ
 - [SSL LAB](https://www.ssllabs.com/ssltest/) ควรจะต้องอยู่ในระดับ A ขึ้นไป
 - [Security Header](https://securityheaders.com/) ควรต้องอยู่ในระดับ A ขึ้น (หากเป็นไปได้)
 
-### การแก้ปัญหา Ciphersuite และ Hash algorithm ของ Windows Server, IIS, MSSQL
+### 📋 การแก้ปัญหา Ciphersuite และ Hash algorithm ของ Windows Server, IIS, MSSQL
 ให้ทำการแก้ไขที่ Registry ของ OS
 // TODO:
 
