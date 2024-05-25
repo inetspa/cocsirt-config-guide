@@ -132,3 +132,26 @@ sudo ifconfig
 4. สร้าง `DWORD` ที่ชื่อว่า `Enabled` และตั้งค่าเป็น `0`
 
 ![Windows Registry](assets/windows_sweet32.png "SWEET32")
+
+หรือจะใช้วิธีการ Download program ที่ชื่อว่า IIS Crypto มาเพื่อ Config ผ่าน GUI ได้ง่ายๆ ที่ [Download](https://www.nartac.com/Products/IISCrypto/Download)
+
+เมื่อเปิดโปรแกรมจะเจอหน้าต่างการตั้งค่า ให้กดที่ปุ่ม `Best Practices`
+
+![Nartac GUI](assets/nartac_iis_crypto.png)
+
+หลังจากให้ นั้นให้ Click เพื่อเอาหัวข้อออกดังนี้ แล้วก็ทำการ `Apply`
+
+- Server Protocols
+    - Uncheck `TLS 1.0`
+    - Uncheck `TLS 1.1`
+
+- Client Protocols
+    - Uncheck `TLS 1.0`
+    - Uncheck `TLS 1.1`
+
+- Ciphers
+    - Uncheck `Triple DES 168`
+
+- Hashes
+    - Uncheck `MD5`
+    - Uncheck `SHA`
