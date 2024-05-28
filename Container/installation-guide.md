@@ -62,12 +62,14 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - ./mysql-data:/var/lib/mysql
+      - mysql-data:/var/lib/mysql
     environment:
       - MYSQL_DATABASE=db
       - MYSQL_USER=user
       - MYSQL_PASSWORD=password
       - MYSQL_ROOT_PASSWORD=secret
+volumes:
+  mysql-data:
 ```
 
 หลังจาก ใส่ไฟล์เสร็จ ก็ทำการ start container
@@ -95,7 +97,7 @@ services:
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     restart: always
     volumes:
-      - ./mysql-data:/var/lib/mysql
+      - mysql-data:/var/lib/mysql
     environment:
       MYSQL_DATABASE: db
       MYSQL_USER: user
@@ -107,7 +109,7 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - ./wordpress-data:/var/www/html
+      - wordpress-data:/var/www/html
     environment:
       WORDPRESS_DB_HOST: mysql
       WORDPRESS_DB_USER: user
@@ -115,6 +117,10 @@ services:
       WORDPRESS_DB_NAME: db
     depends_on:
       - mysql
+
+volumes:
+  mysql-data:
+  wordpress-data:
 ```
 
 3. หลังจากสร้างไฟล์เสร็จ ก็รันคำสั่ง
