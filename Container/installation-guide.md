@@ -124,4 +124,4 @@ sudo docker compose up -d
 
 4. รอสักครู่ เพื่อให้ database start เสร็จสมบูรณ์ ก็จะสามารถเปิดหน้าเว็บ ```http://127.0.0.1:8080``` ก็จะเริ่มเข้าใจงาน wordpress ได้แล้ว อย่างง่ายดาย
 
-![Wordpress](assets/wordpress-docker.png)
+![Wordpress](../assets/wordpress-docker.png)
