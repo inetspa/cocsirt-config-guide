@@ -175,19 +175,22 @@ Cr. https://forums.centos.org/viewtopic.php?t=63988&start=10
 สิ่งที่ต้องใช้
 1. ไฟล์ Cert เช่น abc.crt
 2. ไฟล์ Key เช่น key.pem
-3. รหัสผ่านสำหรับใส่ไว้ในไฟล์ pfx
+3. CA Cert ไฟล์ ca.crt
+4. รหัสผ่านสำหรับใส่ไว้ในไฟล์ pfx
 
 รูปแบบคำสั่งที่ใช้ Convert ก็จะเป็นดังนี้ เป็นการ Conert จาก pem เป็น pkcs12
 ```
 # Convert pem to pfx
-openssl pkcs12 -inkey <private_key_file> -in <cert_file> -export -out <output_pfx_file>
+openssl pkcs12 -inkey <private_key_file> -in <cert_file> -certfile <ca_cert_file> -export -out <output_pfx_file>
 ```
 
 ตัวอย่างการรันคำสั่งจากข้อมูลข้างต้น
 ```
-openssl pkcs12 -inkey abc.pem -in abc.crt -export -out abc.pfx
+openssl pkcs12 -inkey abc.pem -in abc.crt -certfile ca.crt -export -out abc.pfx
 ```
 เมื่อรันคำสั่ง ระบบจะให้เราใส่ Password สำหรับ pfx ไฟล์ และจะได้ไฟล์ output ชื่อ `abc.pfx` มา
 
 ให้นำไฟล์นี้ `abc.pfx` ไป import ใน IIS บน Windows และใช้ Password ที่เราใส่ตอน Convert มา
 ก็จะสามารถใช้งาน Cert ได้
+
+Cr. https://www.sslshopper.com/ssl-converter.html
