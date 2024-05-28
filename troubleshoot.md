@@ -155,3 +155,39 @@ sudo ifconfig
 - Hashes
     - Uncheck `MD5`
     - Uncheck `SHA`
+
+
+## Import OVA CentOS7 จาก VirtualBox เข้า Promox แล้ว Boot ไม่ได้ติดที่หน้า Dracut
+ในตอน Boot ที่หน้า Grub ให้เลือก Boot อันท้ายสุดที่จะมีคำว่า `Rescue` เพื่อเข้าสู่ระบบ
+
+หลังจาก Boot เข้ามา แล้วก็ให้เปิด Terminal แล้วเพิ่มคำสั่ง เพื่อ regenerate dracut ใหม่
+
+```
+sudo dracut --regenerate-all --force
+```
+
+แล้วจึงทำการ Reboot หลังจากนั้นก็จะกลับมาใช้งานได้ปกติ
+
+Cr. https://forums.centos.org/viewtopic.php?t=63988&start=10
+
+## การ Convert File Cert PEM ให้เป็น Format สำหรับใช้ใน Windows (.fpx)
+
+สิ่งที่ต้องใช้
+1. ไฟล์ Cert เช่น abc.crt
+2. ไฟล์ Key เช่น key.pem
+3. รหัสผ่านสำหรับใส่ไว้ในไฟล์ pfx
+
+รูปแบบคำสั่งที่ใช้ Convert ก็จะเป็นดังนี้ เป็นการ Conert จาก pem เป็น pkcs12
+```
+# Convert pem to pfx
+openssl pkcs12 -inkey <private_key_file> -in <cert_file> -export -out <output_pfx_file>
+```
+
+ตัวอย่างการรันคำสั่งจากข้อมูลข้างต้น
+```
+openssl pkcs12 -inkey abc.pem -in abc.crt -export -out abc.pfx
+```
+เมื่อรันคำสั่ง ระบบจะให้เราใส่ Password สำหรับ pfx ไฟล์ และจะได้ไฟล์ output ชื่อ `abc.pfx` มา
+
+ให้นำไฟล์นี้ `abc.pfx` ไป import ใน IIS บน Windows และใช้ Password ที่เราใส่ตอน Convert มา
+ก็จะสามารถใช้งาน Cert ได้
