@@ -194,3 +194,14 @@ openssl pkcs12 -inkey abc.pem -in abc.crt -certfile ca.crt -export -out abc.pfx
 ก็จะสามารถใช้งาน Cert ได้
 
 Cr. https://www.sslshopper.com/ssl-converter.html
+
+### 📋 กรณีใช้ NMAP scan แล้วเจอ port TCP/2000 หรือ TCP/5060 ที่ Firewall Fortigate
+
+ตัวอย่างที่ Scan เจอ จะพบ 2 ports ดังนี้
+
+![NMAP Scan](assets/nmap-sccp.jpg)
+
+หากไม่ได้มีการใช้งาน SIP และ Cisco CSSP
+ให้ทำการ ปิด ที่ Firewall โดยใช้ Command line ดังนี้ได้เลย
+
+![Disable SIP/SCCP](assets/sip-sccp.jpg)
