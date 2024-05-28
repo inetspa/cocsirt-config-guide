@@ -157,7 +157,7 @@ sudo ifconfig
     - Uncheck `SHA`
 
 
-## Import OVA CentOS7 จาก VirtualBox เข้า Promox แล้ว Boot ไม่ได้ติดที่หน้า Dracut
+### 📋 Import OVA CentOS7 จาก VirtualBox เข้า Promox แล้ว Boot ไม่ได้ติดที่หน้า Dracut
 ในตอน Boot ที่หน้า Grub ให้เลือก Boot อันท้ายสุดที่จะมีคำว่า `Rescue` เพื่อเข้าสู่ระบบ
 
 หลังจาก Boot เข้ามา แล้วก็ให้เปิด Terminal แล้วเพิ่มคำสั่ง เพื่อ regenerate dracut ใหม่
@@ -170,7 +170,7 @@ sudo dracut --regenerate-all --force
 
 Cr. https://forums.centos.org/viewtopic.php?t=63988&start=10
 
-## การ Convert File Cert PEM ให้เป็น Format สำหรับใช้ใน Windows (.fpx)
+### 📋 การ Convert File Cert PEM ให้เป็น Format สำหรับใช้ใน Windows (.fpx)
 
 สิ่งที่ต้องใช้
 1. ไฟล์ Cert เช่น abc.crt
