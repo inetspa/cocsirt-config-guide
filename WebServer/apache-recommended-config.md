@@ -124,12 +124,14 @@ Header always set X-XSS-Protection "1; mode=block"
 Header always set X-Content-Type-Options "nosniff"
 Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
 
-# HTTPS Strength Config
-SSLProtocol -All +TLSv1.2 +TLSv1.3
-SSLHonorCipherOrder on
-SSLCompression      off
-SSLSessionTickets   off
-SSLCipherSuite EECDH:EDH:!NULL:!SSLv2:!RC4:!aNULL:!3DES:!IDEA:!SHA1:!SHA256:!SHA384
+<IfModule mod_ssl.c>
+    # HTTPS Strength Config
+    SSLProtocol -All +TLSv1.2 +TLSv1.3
+    SSLHonorCipherOrder on
+    SSLCompression      off
+    SSLSessionTickets   off
+    SSLCipherSuite EECDH:EDH:!NULL:!SSLv2:!RC4:!aNULL:!3DES:!IDEA:!SHA1:!SHA256:!SHA384
+</IfModule>
 ```
 
 # 3. เปิดใช้งาน gzip เพื่อเพิ่มประสิทธิภาพในการ Transfer web ถึง user ได้เร็วขึ้น
