@@ -137,8 +137,10 @@ Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains
 # 3. เปิดใช้งาน gzip เพื่อเพิ่มประสิทธิภาพในการ Transfer web ถึง user ได้เร็วขึ้น
 สร้างไฟล์ `/etc/httpd/conf.d/002_performance.conf` และเพิ่มเข้าไปดังนี้
 ```
-# Enable HTTP/2
-Protocols h2 http/1.1
+<IfModule mod_ssl.c>
+    # Enable HTTP/2
+    Protocols h2 http/1.1
+</IfModule>
 
 # GZIP compression for text files: HTML, CSS, JS, Text, XML, fonts
 <IfModule mod_deflate.c>
