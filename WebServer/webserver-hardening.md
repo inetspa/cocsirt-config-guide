@@ -14,12 +14,12 @@ ServerSignature Off
 เพิ่ม configuration ในไฟล์ `/etc/httpd/conf.d/security.conf`
 ```
 <IfModule mod_ssl.c>
-# HTTPS Strength Config
-SSLProtocol -All +TLSv1.2 +TLSv1.3
-SSLHonorCipherOrder on
-SSLCompression      off
-SSLSessionTickets   off
-SSLCipherSuite EECDH:EDH:!NULL:!SSLv2:!RC4:!aNULL:!3DES:!IDEA:!SHA1:!SHA256:!SHA384
+    # HTTPS Strength Config
+    SSLProtocol -All +TLSv1.2 +TLSv1.3
+    SSLHonorCipherOrder on
+    SSLCompression      off
+    SSLSessionTickets   off
+    SSLCipherSuite EECDH:EDH:!NULL:!SSLv2:!RC4:!aNULL:!3DES:!IDEA:!SHA1:!SHA256:!SHA384
 </IfModule>
 ```
 
@@ -37,8 +37,8 @@ Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains
 เพิ่ม code นี้ในไฟล์ `/etc/httpd/conf.d/security.conf`
 ```
 <IfModule mod_ssl.c>
-# Enable HTTP/2
-Protocols h2 http/1.1
+    # Enable HTTP/2
+    Protocols h2 http/1.1
 </IfModule>
 ```
 
