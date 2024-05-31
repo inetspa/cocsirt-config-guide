@@ -21,7 +21,7 @@ sudo openssl req -x509 -newkey rsa:4096 \
 ```
 
 # Add default config `/etc/nginx/conf.d/000_default_http.conf`
-```bash
+```nginx
 # HTTP Server
 server {
     listen          80 default_server;
@@ -51,7 +51,7 @@ server {
 ```
 
 # Add security header config `/etc/nginx/conf.d/001_security_header.conf`
-```conf
+```nginx
 # security headers
 add_header X-Frame-Options "SAMEORIGIN" always;
 add_header X-XSS-Protection "1; mode=block" always;
@@ -60,7 +60,7 @@ add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; prelo
 ```
 
 # Setup nginx config `/etc/nginx/nginx.conf`
-```conf
+```nginx
 user nginx;
 worker_processes auto;
 error_log /var/log/nginx/error.log;
@@ -137,7 +137,7 @@ http {
 ```
 
 # Unlock limit nofile `/etc/security/limit.conf`
-```
+```conf
 # Allow max limit for nginx process user
 nginx   soft    nofile  65535
 nginx   hard    nofile  65535
@@ -150,24 +150,24 @@ nginx	hard	nproc	65535
 https://serverfault.com/questions/1145323/selinux-blocking-nginx-t
 
 1. Check SELinux Audit Logs:
-```
+```bash
 sudo ausearch -c 'nginx' --raw | audit2allow -M my-nginx-policy
 sudo semodule -i my-nginx-policy.pp
 ```
 
 2. Check Nginx Configuration Files:
-```
+```bash
 sudo chcon -t httpd_config_t /etc/nginx/nginx.conf
 ```
 
 3. Relabel the Entire Nginx Configuration Directory (if necessary):
-```
+```bash
 sudo restorecon -Rv /etc/nginx/
 ```
 
 
 # Add more vhost
-```
+```nginx
 # HTTP Server
 server {
     listen          80;

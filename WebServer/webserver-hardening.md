@@ -4,7 +4,7 @@
 
 ### 📋 ปิดช่องโหว่ Apache version (httpd hardening)
 เพิ่ม config เพื่อปิดไม่ให้แสดง version ของ httpd ในไฟล์ `/etc/httpd/conf.d/security.conf`
-```
+```apache
 # Hide version for security reason
 ServerTokens Prod
 ServerSignature Off
@@ -12,7 +12,7 @@ ServerSignature Off
 
 ### 📋 ปิดช่องโหว่ Apache CipherSuit strenght และ TLS version (Weak Cipher, SWEET32, BLEED)
 เพิ่ม configuration ในไฟล์ `/etc/httpd/conf.d/security.conf`
-```
+```apache
 <IfModule mod_ssl.c>
     # HTTPS Strength Config
     SSLProtocol -All +TLSv1.2 +TLSv1.3
@@ -25,7 +25,7 @@ ServerSignature Off
 
 ### 📋 เพิ่ม Security header ของ apache เพื่อป้องกันการโจมตี XSS และ IFrame
 เพิ่ม configuration ในไฟล์ `/etc/httpd/conf.d/security.conf`
-```
+```apache
 # Security Header
 Header always set X-Frame-Options "SAMEORIGIN"
 Header always set X-XSS-Protection "1; mode=block"
@@ -35,7 +35,7 @@ Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains
 
 ### 📋 Enable Http/2.0 ให้กับ Apache
 เพิ่ม code นี้ในไฟล์ `/etc/httpd/conf.d/security.conf`
-```
+```apache
 <IfModule mod_ssl.c>
     # Enable HTTP/2
     Protocols h2 http/1.1
@@ -46,7 +46,7 @@ Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains
 
 ### 📋 ปิดช่องโหว่ของ PHP Version (php hardening)
 แก้ไขไฟล์ `/etc/php.ini` เพื่อปิดไม่ให้ php แสดง version ไปผ่านหน้าเว็บ
-```
+```apache
 # แก้ไข expose_php จาก On ให้เป็น Off
 expose_php = Off
 ```

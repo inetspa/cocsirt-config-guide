@@ -1,5 +1,5 @@
 # 0. Replace `/etc/httpd/conf/httpd.conf` ด้วย config ดังนี้
-```
+```apache
 # Mod location
 ServerRoot "/etc/httpd"
 Include conf.modules.d/*.conf
@@ -82,7 +82,7 @@ IncludeOptional conf.d/*.conf
 
 # 1. Default web config
 สร้างไฟล์ `/etc/httpd/conf.d/000_default_web.conf` และเพิ่ม config
-```
+```apache
 # Define global
 Listen 80
 Listen 443 https
@@ -113,7 +113,7 @@ DirectoryIndex index.php index.html
 ```
 # 2. ปิด Server token ไม่ให้แสดง Version, HTTP Header และ HTTPS ที่แนะนำ
 สร้างไฟล์ `/etc/httpd/conf.d/001_security.conf` และเพิ่ม Config เข้าไปดังนี้
-```
+```apache
 # Hide version for security reason
 ServerTokens Prod
 ServerSignature Off
@@ -136,7 +136,7 @@ Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains
 
 # 3. เปิดใช้งาน gzip เพื่อเพิ่มประสิทธิภาพในการ Transfer web ถึง user ได้เร็วขึ้น
 สร้างไฟล์ `/etc/httpd/conf.d/002_performance.conf` และเพิ่มเข้าไปดังนี้
-```
+```apache
 <IfModule mod_ssl.c>
     # Enable HTTP/2
     Protocols h2 http/1.1
@@ -170,7 +170,7 @@ Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains
 
 # 4. เพิ่ม File config ให้รองรับ mod_php
 เพิ่มไฟล์ `/etc/httpd/conf.d/003_mod_php.conf` และเพิ่ม php config
-```
+```apache
 # The following lines prevent .user.ini files from being viewed by Web clients.
 <Files ".user.ini">
     <IfModule mod_authz_core.c>
@@ -218,7 +218,7 @@ AddType text/html .php
 
 # 5. เพิ่ม vHost ที่เราต้องการใช้งานดังตัวอย่าง Web-A และ Web-B
 สร้างไฟล์ชื่อ `/etc/httpd/conf.d/101_web_a_one.conf` สำหรับเว็บ https://web-a.sdi.one.th
-```
+```apache
 # Redirect to https
 <VirtualHost *:80>
     ServerName web-a.sdi.one.th
@@ -250,7 +250,7 @@ AddType text/html .php
 
 
 สร้างไฟล์ชื่อ `/etc/httpd/conf.d/102_web_b_one.conf` สำหรับเว็บ https://web-b.sdi.one.th
-```
+```apache
 # Redirect to https
 <VirtualHost *:80>
     ServerName web-b.sdi.one.th

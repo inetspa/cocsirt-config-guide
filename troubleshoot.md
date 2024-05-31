@@ -2,7 +2,7 @@
 
 ### 📋 ไม่สามารถ Resolve name ได้
 ให้ตรวจสอบไฟล์ `/etc/resolve.conf` ว่ามีสร้างไว้ หรือไม่ตั้งค่า nameserver ไว้หรือยัง หากยังก็ให้เพิ่มเข้าไปดังนี้
-```
+```conf
 # Google DNS
 nameserver 8.8.8.8
 # Cloudflare DNS
@@ -17,7 +17,7 @@ nameserver 1.1.1.1
 
 ### 📋 Update AlmaLinux แล้วเจอปัญหา GPG Invalid หรือไม่ถูก สามารถ bypass ชั่วคราวได้
 สามารถ Bypass gpg check ผ่านการรัน yum ในแต่ละครั้งได้โดยใช้ parameter ว่าอ `--nogpgcheck`
-```
+```bash
 sudo yum update --nogpgcheck
 ```
 
@@ -53,7 +53,7 @@ sudo yum update --nogpgcheck
 
 ### 📋 ปิดช่องโหว่ Apache version (httpd hardening)
 เพิ่ม config เพื่อปิดไม่ให้แสดง version ของ httpd ในไฟล์ `/etc/httpd/conf/httpd.conf`
-```
+```apache
 # Hide version for security reason
 ServerTokens Prod
 ServerSignature Off
@@ -61,14 +61,14 @@ ServerSignature Off
 
 ### 📋 ปิดช่องโหว่ของ PHP Version (php hardening)
 แก้ไขไฟล์ `/etc/php.ini` เพื่อปิดไม่ให้ php แสดง version ไปผ่านหน้าเว็บ
-```
+```apache
 # แก้ไข expose_php จาก On ให้เป็น Off
 expose_php = Off
 ```
 
 ### 📋 ปิดช่องโหว่ Apache CipherSuit strenght และ TLS version (Weak Cipher, SWEET32, BLEED)
 เพิ่ม configuration ในไฟล์ `/etc/httpd/conf/httpd.conf`
-```
+```apache
 # HTTPS Strength Config
 SSLProtocol -All +TLSv1.2 +TLSv1.3
 SSLHonorCipherOrder on
@@ -79,7 +79,7 @@ SSLCipherSuite EECDH:EDH:!NULL:!SSLv2:!RC4:!aNULL:!3DES:!IDEA:!SHA1:!SHA256:!SHA
 
 ### 📋 เพิ่ม Security header ของ apache เพื่อป้องกันการโจมตี XSS และ IFrame
 เพิ่ม configuration ในไฟล์ `/etc/httpd/conf/httpd.conf`
-```
+```apache
 # Security Header
 Header always set X-Frame-Options "SAMEORIGIN"
 Header always set X-XSS-Protection "1; mode=block"
@@ -89,20 +89,20 @@ Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains
 
 ### 📋 Enable Http/2.0 ให้กับ Apache
 เพิ่ม code นี้ในไฟล์ `/etc/httpd/conf/httpd.conf`
-```
+```apache
 # Enable HTTP/2
 Protocols h2 http/1.1
 ```
 
 ### 📋 คำสั่งสำหรับ update os linux
 - สำหรับ Ubuntu, Debian
-```
+```bash
 sudo apt update
 sudo apt upgrade -y
 ```
 
 - สำหรับ CentOS, AlmaLinux, RockyLinux
-```
+```bash
 sudo yum update -y
 
 # สำหรับ update เฉพาะ Security patch update
@@ -110,12 +110,12 @@ sudo yum udpate --security -y
 ```
 
 ### 📋 คำสั่งสำหรับตรวจสอบ Port ที่เปิดไว้ในเครื่อง และ Process ที่ใช้ Port นั้นอยู่
-```
+```bash
 sudo netstat -lnp
 ```
 
 ### 📋 คำสั่งสำหรับตรวจสอบ Interface ของเครื่อง Linux
-```
+```bash
 sudo ifconfig
 ```
 *หากไม่สามารถใช้งานได้ ให้ลอง Install `sudo yum install net-tools` หรือถ้าใช้ Ubuntu ก็ใช้คำสั่ง `sudo apt install net-tools`
@@ -162,7 +162,7 @@ sudo ifconfig
 
 หลังจาก Boot เข้ามา แล้วก็ให้เปิด Terminal แล้วเพิ่มคำสั่ง เพื่อ regenerate dracut ใหม่
 
-```
+```bash
 sudo dracut --regenerate-all --force
 ```
 
@@ -179,13 +179,13 @@ Cr. https://forums.centos.org/viewtopic.php?t=63988&start=10
 4. รหัสผ่านสำหรับใส่ไว้ในไฟล์ pfx
 
 รูปแบบคำสั่งที่ใช้ Convert ก็จะเป็นดังนี้ เป็นการ Conert จาก pem เป็น pkcs12
-```
+```bash
 # Convert pem to pfx
 openssl pkcs12 -inkey <private_key_file> -in <cert_file> -certfile <ca_cert_file> -export -out <output_pfx_file>
 ```
 
 ตัวอย่างการรันคำสั่งจากข้อมูลข้างต้น
-```
+```bash
 openssl pkcs12 -inkey abc.pem -in abc.crt -certfile ca.crt -export -out abc.pfx
 ```
 เมื่อรันคำสั่ง ระบบจะให้เราใส่ Password สำหรับ pfx ไฟล์ และจะได้ไฟล์ output ชื่อ `abc.pfx` มา
@@ -205,3 +205,23 @@ Cr. https://www.sslshopper.com/ssl-converter.html
 ให้ทำการ ปิด ที่ Firewall โดยใช้ Command line ดังนี้ได้เลย
 
 ![Disable SIP/SCCP](./assets/sip-sccp.jpg)
+
+
+### 📋 กรณีต้องการให้ Apache Allow `path` ให้เข้าได้เฉพาะบาง IP เท่านั้น
+
+สามารถเพิ่มได้ 2 ที่ทั้ง Config ที่ vhost หรือที่ .htaccess ของ url นั้นได้ โดยการเพิ่ม config ลงไปดังนี้
+
+```apache
+<Location "/location/">  
+    AllowOverride None  
+    Order Deny,Allow  
+    Deny from All
+    # รายการ Allow IP ที่ต้องการ
+    Allow from 10.10.10.10
+    Allow from 10.10.1.0/24
+</Location>
+
+<Location "/location/sub">  
+    Allow from All
+</Location>
+```
