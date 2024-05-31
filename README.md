@@ -8,12 +8,12 @@
     - Red Hat จะประกอบไปด้วย Red Hat, CentOS, Almalinux, Rocky Linux
 
 ### สารบัญ
-- [Password Management](PasswordManagement)
-- [User Access Management](UserAccessManagement)
-- [Multi-factor authentication](MultiFactorAuth)
-- [Web Server](WebServer)
-- [Container](Container/installation-guide.md)
-- [Troubleshoot](troubleshoot.md)
+- [Password Management](./PasswordManagement)
+- [User Access Management](./UserAccessManagement)
+- [Multi-factor authentication](./MultiFactorAuth)
+- [Web Server](./WebServer)
+- [Container](./Container/installation-guide.md)
+- [Troubleshoot](./troubleshoot.md)
 
 ### อัพเดท
 - v0.0.0 / 15-May-2024 Initialize project

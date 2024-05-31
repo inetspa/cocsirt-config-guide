@@ -43,13 +43,13 @@ sudo yum update --nogpgcheck
 ```
 
 ### 📋 Recommend Apache2 configuration
-[Config](WebServer/apache-recommended-config.md)
+[Config](./WebServer/apache-recommended-config.md)
 
 ### 📋 การติดตั้ง XAMP บน AlmaLinux
-[XAMP](WebServer/install-xamp-alma9.md)
+[XAMP](./WebServer/install-xamp-alma9.md)
 
 ### การติดตั้ง NGINX 1.26.0
-[NGINX 1.26.0](WebServer/nginx-1.26-install.md)
+[NGINX 1.26.0](./WebServer/nginx-1.26-install.md)
 
 ### 📋 ปิดช่องโหว่ Apache version (httpd hardening)
 เพิ่ม config เพื่อปิดไม่ให้แสดง version ของ httpd ในไฟล์ `/etc/httpd/conf/httpd.conf`
@@ -131,13 +131,13 @@ sudo ifconfig
 3. ถ้าไม่มี key นี้ก็ให้สร้าง key โดยการ Click ขวา ที่ `SCHANNEL` เลือก `New -> Key` และตั้งชื่อว่า `Triple DES 168` 
 4. สร้าง `DWORD` ที่ชื่อว่า `Enabled` และตั้งค่าเป็น `0`
 
-![Windows Registry](assets/windows_sweet32.png "SWEET32")
+![Windows Registry](./assets/windows_sweet32.png "SWEET32")
 
 หรือจะใช้วิธีการ Download program ที่ชื่อว่า IIS Crypto มาเพื่อ Config ผ่าน GUI ได้ง่ายๆ ที่ [Download](https://www.nartac.com/Products/IISCrypto/Download)
 
 เมื่อเปิดโปรแกรมจะเจอหน้าต่างการตั้งค่า ให้กดที่ปุ่ม `Best Practices`
 
-![Nartac GUI](assets/nartac_iis_crypto.png)
+![Nartac GUI](./assets/nartac_iis_crypto.png)
 
 หลังจากให้ นั้นให้ Click เพื่อเอาหัวข้อออกดังนี้ แล้วก็ทำการ `Apply`
 
@@ -199,9 +199,9 @@ Cr. https://www.sslshopper.com/ssl-converter.html
 
 ตัวอย่างที่ Scan เจอ จะพบ 2 ports ดังนี้
 
-![NMAP Scan](assets/nmap-sccp.jpg)
+![NMAP Scan](./assets/nmap-sccp.jpg)
 
 หากไม่ได้มีการใช้งาน SIP และ Cisco CSSP
 ให้ทำการ ปิด ที่ Firewall โดยใช้ Command line ดังนี้ได้เลย
 
-![Disable SIP/SCCP](assets/sip-sccp.jpg)
+![Disable SIP/SCCP](./assets/sip-sccp.jpg)
