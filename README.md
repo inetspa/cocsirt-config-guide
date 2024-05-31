@@ -18,3 +18,4 @@
 ### อัพเดท
 - v0.0.0 / 15-May-2024 Initialize project
 - v0.0.1 / 23-May-2024 เพิ่ม WebServer configuration และ Troubleshoot
+- v0.0.2 / 31-May-2024 เพิ่มการ Hardening ของ Wordpress และ PHP กับ SQL Injection
