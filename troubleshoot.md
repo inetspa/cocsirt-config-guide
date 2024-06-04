@@ -67,14 +67,16 @@ expose_php = Off
 ```
 
 ### 📋 ปิดช่องโหว่ Apache CipherSuit strenght และ TLS version (Weak Cipher, SWEET32, BLEED)
-เพิ่ม configuration ในไฟล์ `/etc/httpd/conf/httpd.conf`
+เพิ่ม configuration ในไฟล์ `/etc/httpd/conf.d/ssl.conf`
 ```apache
-# HTTPS Strength Config
-SSLProtocol -All +TLSv1.2 +TLSv1.3
-SSLHonorCipherOrder on
-SSLCompression      off
-SSLSessionTickets   off
-SSLCipherSuite EECDH:EDH:!NULL:!SSLv2:!RC4:!aNULL:!3DES:!IDEA:!SHA1:!SHA256:!SHA384
+<IfModule mod_ssl.c>
+    # HTTPS Strength Config
+    SSLProtocol -All +TLSv1.2 +TLSv1.3
+    SSLHonorCipherOrder on
+    SSLCompression      off
+    SSLSessionTickets   off
+    SSLCipherSuite EECDH:EDH:!NULL:!SSLv2:!RC4:!aNULL:!3DES:!IDEA:!SHA1:!SHA256:!SHA384
+</IfModule>
 ```
 
 ### 📋 เพิ่ม Security header ของ apache เพื่อป้องกันการโจมตี XSS และ IFrame
@@ -88,10 +90,12 @@ Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains
 ```
 
 ### 📋 Enable Http/2.0 ให้กับ Apache
-เพิ่ม code นี้ในไฟล์ `/etc/httpd/conf/httpd.conf`
+เพิ่ม code นี้ในไฟล์ `/etc/httpd/conf.d/ssl.conf`
 ```apache
-# Enable HTTP/2
-Protocols h2 http/1.1
+<IfModule mod_ssl.c>
+    # Enable HTTP/2
+    Protocols h2 http/1.1
+</IfModule>
 ```
 
 ### 📋 คำสั่งสำหรับ update os linux
@@ -170,7 +174,7 @@ sudo dracut --regenerate-all --force
 
 Cr. https://forums.centos.org/viewtopic.php?t=63988&start=10
 
-### 📋 การ Convert File Cert PEM ให้เป็น Format สำหรับใช้ใน Windows (.fpx)
+### 📋 การ Convert File Cert PEM ให้เป็น Format สำหรับใช้ใน Windows (.pfx)
 
 สิ่งที่ต้องใช้
 1. ไฟล์ Cert เช่น abc.crt
