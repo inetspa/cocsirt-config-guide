@@ -179,7 +179,7 @@ Cr. https://forums.centos.org/viewtopic.php?t=63988&start=10
 สิ่งที่ต้องใช้
 1. ไฟล์ Cert เช่น abc.crt
 2. ไฟล์ Key เช่น key.pem
-3. CA Cert ไฟล์ ca.crt
+3. CA Intermediate Cert ไฟล์ ca.crt
 4. รหัสผ่านสำหรับใส่ไว้ในไฟล์ pfx
 
 รูปแบบคำสั่งที่ใช้ Convert ก็จะเป็นดังนี้ เป็นการ Conert จาก pem เป็น pkcs12
