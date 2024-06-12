@@ -2,12 +2,12 @@
 
 
 #### เรียกดูสถานะปัจจุบัน
-```
+```bash
 sudo firewall-cmd --list-all
 ```
 
 #### การเพิ่ม rule จะใช้ parameter `--add-port`
-```
+```bash
 # เพิ่ม Firewall rule ตัวอย่างเพิ่ม http, https
 sudo filewall-cmd --permanent --add-port 80/tcp
 sudo filewall-cmd --permanent --add-port 443/tcp
@@ -20,7 +20,7 @@ sudo firewall-cmd --reload
 ```
 
 #### การลบ rule จะใช้ parameter `--remove-port`
-```
+```bash
 # ลบ Port database mysql, mariadb
 sudo filewall-cmd --permanent --remove-port 3306/tcp
 
