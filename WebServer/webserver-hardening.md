@@ -10,6 +10,15 @@ ServerTokens Prod
 ServerSignature Off
 ```
 
+สิ่งที่เราเปลี่ยนแปลงคือ
+```
+# Before
+Server: Apache/2.4.57 (AlmaLinux) OpenSSL/3.0.7
+
+# After
+Server: Apache
+```
+
 ### 📋 ปิดช่องโหว่ Apache CipherSuit strenght และ TLS version (Weak Cipher, SWEET32, BLEED)
 เพิ่ม configuration ในไฟล์ `/etc/httpd/conf.d/security.conf`
 ```apache
@@ -49,6 +58,12 @@ Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains
 ```apache
 # แก้ไข expose_php จาก On ให้เป็น Off
 expose_php = Off
+```
+
+ตัวอย่าง PHP Version ที่ Return มาทาง HTTP Header
+```
+# Before
+X-Powered-By: PHP/8.2.12
 ```
 
 ### 📋 การแก้ปัญหา Ciphersuite และ Hash algorithm ของ Windows Server, IIS, MSSQL (SWEET32)
