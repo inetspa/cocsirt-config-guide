@@ -135,6 +135,8 @@ sudo ifconfig
 3. ถ้าไม่มี key นี้ก็ให้สร้าง key โดยการ Click ขวา ที่ `Ciphers` เลือก `New -> Key` และตั้งชื่อว่า `Triple DES 168` 
 4. สร้าง `DWORD` ที่ชื่อว่า `Enabled` และตั้งค่าเป็น `0`
 
+![Fixed_SWEET32](./assets/sweet32fixed.png)
+
 <!-- ![Windows Registry](./assets/windows_sweet32.png "SWEET32") -->
 
 หรือจะใช้วิธีการ Download program ที่ชื่อว่า IIS Crypto มาเพื่อ Config ผ่าน GUI ได้ง่ายๆ ที่ [Download](https://www.nartac.com/Products/IISCrypto/Download)
