@@ -2,7 +2,7 @@
 
 ## Apache / Httpd
 
-### 📋 ปิดช่องโหว่ Apache version (httpd hardening)
+### 📋 ปิดช่องโหว่ Apache version (httpd hardening) โดน VA พวกช่องโหว่ Apache CVE หลายๆ ตัว
 เพิ่ม config เพื่อปิดไม่ให้แสดง version ของ httpd ในไฟล์ `/etc/httpd/conf.d/security.conf`
 ```apache
 # Hide version for security reason
@@ -64,16 +64,20 @@ expose_php = Off
 ```
 # Before
 X-Powered-By: PHP/8.2.12
+
+# After
+<ไม่มี Header นี้>
 ```
 
 ### 📋 การแก้ปัญหา Ciphersuite และ Hash algorithm ของ Windows Server, IIS, MSSQL (SWEET32)
 ให้ทำการแก้ไขที่ Registry ของ OS
 1. เปิด `Registry Editor` โดยใช้คำสั่ง `regedit`
 2. ไปที่ `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\Triple DES 168`
-3. ถ้าไม่มี key นี้ก็ให้สร้าง key โดยการ Click ขวา ที่ `SCHANNEL` เลือก `New -> Key` และตั้งชื่อว่า `Triple DES 168` 
+3. ถ้าไม่มี key นี้ก็ให้สร้าง key โดยการ Click ขวา ที่ `Ciphers` เลือก `New -> Key` และตั้งชื่อว่า `Triple DES 168` 
 4. สร้าง `DWORD` ที่ชื่อว่า `Enabled` และตั้งค่าเป็น `0`
 
-![Windows Registry](../assets/windows_sweet32.png "SWEET32")
+![Fixed_SWEET32](../assets/sweet32fixed.png)
+<!-- ![Windows Registry](../assets/windows_sweet32.png "SWEET32") -->
 
 หรือจะใช้วิธีการ Download program ที่ชื่อว่า IIS Crypto มาเพื่อ Config ผ่าน GUI ได้ง่ายๆ ที่ [Download](https://www.nartac.com/Products/IISCrypto/Download)
 
