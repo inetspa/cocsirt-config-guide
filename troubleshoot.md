@@ -334,8 +334,6 @@ sudo /usr/libexec/openssh/sftp-server
 
 ### 📋 วิธีตรวจสอบ CPU Process บน Firewall Fortigate หากเจอ High CPU Usage
 
-* เจอปัญหา CPU สูงหลังจาก `enable send syslog` สำหรับ Firewall `Fortigate 61E v6.0.5` แนะนำให้ Upgrade ไป `v6.4.8` หรือสูงกว่า (Note. ได้ทดสอบ `v7.2.8` แล้วไม่เจอปัญหา CPU สูงหลัง enable send syslog)
-
 ทำการ Diag ดู Process
 ``` bash
 # Show top processes information
