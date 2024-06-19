@@ -13,7 +13,7 @@ sudo openssl dhparam -out /etc/nginx/dh2048.pem 2048
 ```bash
 sudo mkdir -p /etc/nginx/ssl
 
-sudo openssl req -x509 -newkey rsa:4096 \
+sudo openssl req -x509 -newkey rsa:4096 -sha256 \
  -keyout /etc/nginx/ssl/nginx-selfsigned.key \
  -out /etc/nginx/ssl/nginx-selfsigned.crt \
  -sha256 -days 3650 -nodes \
