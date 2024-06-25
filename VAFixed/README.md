@@ -148,9 +148,9 @@ openssl pkcs12 -inkey selfsigned.key -in selfsigned.crt -export -out selfsigned.
     1. หา FingerPrint ของ Cert ที่เราใส่เข้าไปเมื่อก่อนหน้า โดยใช้วิธีเดียวกันกับของ Remote Desktop หรือจะใช้คำสั่ง `dir cert:\localmachine\my` ใน PowerShell ก็ได้เหมือนกัน
     2. เมื่อได้ FingerPrint มาแล้วก็ให้เก็บไว้ใน notepad โดย FingerPrint จะมีลักษณะรูปแบบดังตัวอย่างนี้ `13CA91A2E446000863E10156A6748DE70885F29A`
     3. เปิด CMD ขึ้นมา โดยใช้สิทธิ์ Administrator เพื่อตรวจสอบ Service `netsh http show sslcert` จะพบ Service ที่ใช้งานอยู่ ให้ Copy ข้อมูลเหล่านี้ไว้
-        - Port เช่น 0.0.0.0:443
+        - Port เช่น `0.0.0.0:443`
         - Cert Hash ของเดิม เช่น `e9d293e563cc374774bdb90007f7ef618c336f48`
-        - Application ID เช่น {85118119-e5f5-40da-b837-4acbd51d62f0}
+        - Application ID เช่น `{85118119-e5f5-40da-b837-4acbd51d62f0}`
     4. ทำการ Delete Cert ตัวเก่าที่ใช้งานอยู่ด้วยคำสั่ง `netsh http delete sslcert ___PORT___` โดยตรง `___PORT___` นั้นให้เอา Port ที่เราได้จากข้อ 3 มาใส่ จะได้ดังตัวอย่าง `netsh http delete sslcert 0.0.0.0:443` และหาก Result ขึ้นว่า `SSL Certificate successfully deleted` ก็เป็นอันใช้ได้
     5. ทำการเพิ่ม Cert ของเราเข้าไปใน Service นี้ ด้วยคำสั่ง `netsh http add sslcert ___PORT___ certhash=___New_FingerPrint___ appid=___APP_ID___ certstorename=___CERT_LOCAIOTION___` โดยนำข้อมูลจากข้อ 2, 4 มาใส่ จะได้ตัวอย่างคำสั่งดังนี้ `netsh http add sslcert 0.0.0.0:443 certhash=13CA91A2E446000863E10156A6748DE70885F29A appid={85118119-e5f5-40da-b837-4acbd51d62f0} certstorename=My` หากผลลัพธิ์ขึ้นว่า `SSL Certificate successfully added` ก็เป็นอันสำเร็จเรียบร้อย
 
