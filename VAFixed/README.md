@@ -1,6 +1,6 @@
 # รวบรวม KB เกี่ยวกับการแก้ไข VA Scan
 
-## [Critical] Apache 2.4.x
+## 📑 [Critical] Apache 2.4.x
 ![apache2.4.x](./assets/apache2.4.x.jpg)
 
 ***Service***
@@ -12,11 +12,11 @@
 
 ***Solution***
     
-    Upgrade Apache ให้เป็น Version ล่าสุด โดยขึ้นอยู่กับสถานการณ์หน้างาน หากประเมินแล้วว่าการ Upgrade version แล้วมีความเสี่ยงกระทบกับระบบ และ Web ก็ให้เลี่ยงการ Upgrade แล้วไปทำการ Hardening
+Upgrade Apache ให้เป็น Version ล่าสุด โดยขึ้นอยู่กับสถานการณ์หน้างานหากประเมินแล้วว่าการ Upgrade version แล้วมีความเสี่ยงกระทบกับระบบ และ Web ก็ให้เลี่ยงการ Upgrade แล้วไปทำการ Hardening
 
 ***Hardening***
 
-    **ข้อควรระวัง** สำหรับ Apache version 2.4.x ขึ้นไปเท่านั้น หากเป็น Apache version 2.2.x ให้พิจารณาเรื่องการ Upgrade apache version เนื่องจาก Apache version 2.2.x มีโอกาสไม่รองรับ TLSv1.x และไม่สามารถ Apply security ที่แนะนำได้
+**ข้อควรระวัง** สำหรับ Apache version 2.4.x ขึ้นไปเท่านั้น หากเป็น Apache version 2.2.x ให้พิจารณาเรื่องการ Upgrade apache version เนื่องจาก Apache version 2.2.x มีโอกาสไม่รองรับ TLSv1.x และไม่สามารถ Apply security ที่แนะนำได้
 
 1. เพิ่ม config เพื่อปิดไม่ให้แสดง version ของ httpd ในไฟล์ `/etc/httpd/conf/httpd.conf`
 ```apache
@@ -39,9 +39,10 @@ ServerSignature Off
 ```
 * เมื่อแก้ไข config ให้ทำการ รัน `sudo httpd -t` เพื่อทดสอบ configuration compatible ด้วย หากผิดพลาด จะได้แก้ไขก่อนได้ กรณีเป็น Windows ก็สามารถเปิด `CMD` ขึ้นมาแล้วพิมพิ์คำสั่ง `httpd -t` ได้เช่นกัน
 * หากลองรันคำสั่ง `sudo httpd -t` เพื่อตรวจสอบแล้วพบว่า Protocol `TLSv1.3` ยังไม่รองรับ ก็ให้ทำการลบตรง `+TLSv1.3` ออกได้ แล้วลองใหม่อีกครั้ง
+
 3. ทำการ Restart apache service ด้วยคำสั่ง `sudo systemctl restart httpd` หากเป็น Windows ก็ให้เปิดไปที่ `Windows service` แล้วหา service ที่ชื่อว่า `Apache` แล้วทำการ Restart
 
-## [Critical] PHP Version เก่าเกินไป
+## 📑 [Critical] PHP Version เก่าเกินไป
 
 ***Service***
 
@@ -50,7 +51,7 @@ ServerSignature Off
 
 ***Solution***
 
-    Upgrade ไปใช้ PHP Version ใหม่ที่มีการแก้ไข Security bugs แล้ว แต่การ Upgrade PHP Version มีความเสี่ยงสูงมากที่จะทำให้ Web Application ทำงานไม่ปกติ จึงเลี่ยงให้ไป Hardening แทน
+Upgrade ไปใช้ PHP Version ใหม่ที่มีการแก้ไข Security bugs แล้ว แต่การ Upgrade PHP Version มีความเสี่ยงสูงมากที่จะทำให้ Web Application ทำงานไม่ปกติ จึงเลี่ยงให้ไป Hardening แทน
 
 ***Hardening***
 
@@ -59,7 +60,7 @@ ServerSignature Off
 2. หาบรรทัดที่มีคำว่า `expose_php = On` และทำการเปลี่ยนเป็น `expose_php = Off`
 3. Restart service Apache แต่หากใช้งานเป็น php-fpm ก็ให้ทำการ Restart service php-fpm 
 
-## [Critical] 73756 - Microsoft SQL Server Unsupported Version Detection (remote check)
+## 📑 [Critical] 73756 - Microsoft SQL Server Unsupported Version Detection (remote check)
 ![73756](./assets/73756.png)
 
 ***Service***
@@ -70,13 +71,13 @@ ServerSignature Off
 
 ***Solution***
 
-    ให้แจ้ง Vendor เพื่อทำการ Upgrade version SQL ที่ใช้เป็น Version ล่าสุด หากประเมินว่าการ Upgrade version นั้นกระทบการใช้งานทำให้ระบบล่ม ก็ให้พิจารณาการทำ Hardening
+ให้แจ้ง Vendor เพื่อทำการ Upgrade version SQL ที่ใช้เป็น Version ล่าสุด หากประเมินว่าการ Upgrade version นั้นกระทบการใช้งานทำให้ระบบล่ม ก็ให้พิจารณาการทำ Hardening
 
 ***Hardening***
 
-    เปิด Windows Firewall ให้เครื่อง Server ที่ต้องใช้งานสามารถ Access เข้ามาใช้งาน SQL Server ได้เท่านั้น และปิดไม่ให้เครื่องอื่นๆ เข้ามายัง SQL Server เครื่องนี้ได้
+เปิด Windows Firewall ให้เครื่อง Server ที่ต้องใช้งานสามารถ Access เข้ามาใช้งาน SQL Server ได้เท่านั้น และปิดไม่ให้เครื่องอื่นๆ เข้ามายัง SQL Server เครื่องนี้ได้
 
-## [High] 35291 - SSL Certificate Signed Using Weak Hashing Algorithm
+## 📑 [High] 35291 - SSL Certificate Signed Using Weak Hashing Algorithm
 ![35291](./assets/35291.png)
 
 ***Service***
@@ -126,6 +127,12 @@ openssl pkcs12 -inkey selfsigned.key -in selfsigned.crt -export -out selfsigned.
 5. ทำการ Config Service เพื่อใช้งาน Cert ใหม่ที่ได้เพิ่ง Import เข้าไป
 
 - SQL Serve และ SQL Express ให้ทำเหมือนกันตามขั้นตอนดังนี้
+    1. เปิด `SQL Server Configuration Manager` ขึ้นมาแล้วเลือกที่ `Protocol for MSSQLSERVER` คลิกขวา และเลือก `Properties`
+    ![SQL Prop](../assets/win-sql-prop.png)
+    2. เลือก tab `Certificate` และเลือก Cert ที่เราใส่เข้าไป แล้วทำการกด `OK` หลังจากนั้นทำการ Restart SQL Server และลองใช้งานอีกครั้ง
+    ![SQL Cert](../assets/win-sql-cert.png)
+    3. เปิด Service ขึ้นมาแล้ว Restart SQL Server หรือ SQL Express แล้วทดสอบใช้งานอีกครั้ง
+    *Credit: https://virtual-dba.com/blog/upgrading-sha1-certificate-sql-server/*
 
 - Remote Desktop (3389/TCP) ให้ทำตามขั้นตอนดังนี้
     1. หาค่า FingerPrint ของ Cert ที่เราได้ Import ไปก่อนหน้านี้ โดยการ Double Click ที่ Cert
@@ -148,7 +155,7 @@ openssl pkcs12 -inkey selfsigned.key -in selfsigned.crt -export -out selfsigned.
     5. ทำการเพิ่ม Cert ของเราเข้าไปใน Service นี้ ด้วยคำสั่ง `netsh http add sslcert ___PORT___ certhash=___New_FingerPrint___ appid=___APP_ID___ certstorename=___CERT_LOCAIOTION___` โดยนำข้อมูลจากข้อ 2, 4 มาใส่ จะได้ตัวอย่างคำสั่งดังนี้ `netsh http add sslcert 0.0.0.0:443 certhash=13CA91A2E446000863E10156A6748DE70885F29A appid={85118119-e5f5-40da-b837-4acbd51d62f0} certstorename=My` หากผลลัพธิ์ขึ้นว่า `SSL Certificate successfully added` ก็เป็นอันสำเร็จเรียบร้อย
 
 
-## [Medium] 65821 - SSL RC4 Cipher Suites Supported (Bar Mitzvah)
+## 📑 [Medium] 65821 - SSL RC4 Cipher Suites Supported (Bar Mitzvah)
 ![65821](./assets/65821.png)
 
 ***Service***
@@ -159,7 +166,7 @@ openssl pkcs12 -inkey selfsigned.key -in selfsigned.crt -export -out selfsigned.
 
     ***TODO Later***
 
-## [Medium] 104743 - TLS Version 1.0 Protocol Detection
+## 📑 [Medium] 104743 - TLS Version 1.0 Protocol Detection
 ![104743](./assets/104743.png)
 
 ***Service***
@@ -168,7 +175,7 @@ openssl pkcs12 -inkey selfsigned.key -in selfsigned.crt -export -out selfsigned.
 
     ***TODO Later***
 
-## [Medium] 157288 - TLS Version 1.1 Deprecated Protocol
+## 📑 [Medium] 157288 - TLS Version 1.1 Deprecated Protocol
 ![157288](./assets/157288.png)
 
 ***Service***
@@ -179,7 +186,7 @@ openssl pkcs12 -inkey selfsigned.key -in selfsigned.crt -export -out selfsigned.
 
     ***TODO Later***
 
-## [Medium] 187315 - SSH Terrapin Prefix Truncation Weakness (CVE-2023-48795)
+## 📑 [Medium] 187315 - SSH Terrapin Prefix Truncation Weakness (CVE-2023-48795)
 ![187315](./assets/187315.png)
 
 ***Service***
@@ -190,7 +197,7 @@ openssl pkcs12 -inkey selfsigned.key -in selfsigned.crt -export -out selfsigned.
 
     ***TODO Later***
 
-## [Low] 70658 - SSH Server CBC Mode Ciphers Enabled
+## 📑 [Low] 70658 - SSH Server CBC Mode Ciphers Enabled
 ![70658](./assets/70658.png)
 
 ***Service***
@@ -201,7 +208,7 @@ openssl pkcs12 -inkey selfsigned.key -in selfsigned.crt -export -out selfsigned.
 
     ***TODO Later***
 
-## [Low] 153953 - SSH Weak Key Exchange Algorithms Enabled
+## 📑 [Low] 153953 - SSH Weak Key Exchange Algorithms Enabled
 ![153953](./assets/153953.png)
 
 ***Service***
