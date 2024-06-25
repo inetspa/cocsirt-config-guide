@@ -14,6 +14,7 @@
 - [Web Server](./WebServer)
 - [Container](./Container/installation-guide.md)
 - [Troubleshoot](./troubleshoot.md)
+- [VA Scan Fixed](./VAFixed)
 
 ### ⬇️ Download Link
 - [IBM WinCollect 10.1.8](https://cosirt.sdi.one.th/dl/wincollect-10.1.8-17.x64.msi)
