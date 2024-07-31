@@ -63,7 +63,7 @@ docker compose ps
 ```
 ตัวอย่างผลลัพท์
 ```
-docker compose ps
+$ docker compose ps
 NAME                 IMAGE                        COMMAND                  SERVICE             CREATED             STATUS                    PORTS
 guacamole_backend    guacamole/guacd:latest       "/bin/sh -c '/opt/gu…"   guacd               33 minutes ago      Up 33 minutes (healthy)   0.0.0.0:4822->4822/tcp
 guacamole_database   postgres:13.4                "docker-entrypoint.s…"   postgres            33 minutes ago      Up 33 minutes             5432/tcp
