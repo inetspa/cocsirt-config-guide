@@ -29,7 +29,7 @@ e19123301f31   guacamole/guacd:latest       "/bin/sh -c '/opt/gu…"   5 minutes
 75970a4f39f2   postgres:13.4                "docker-entrypoint.s…"   5 minutes ago        Up 5 minutes                    5432/tcp                 guacamole_database
 ```
 
-#### วิธีการตรวจสอบ Size ของ Containers ทั
+#### วิธีการตรวจสอบ Size ของ Containers
 รันคำสั่ง `docker ps -s` หรือกรณีที่ต้องการทุก Containers `docker ps -as` เพื่อตรวจสอบขนาดของ Containers ที่ใช้งาน
 ```
 docker ps -s
