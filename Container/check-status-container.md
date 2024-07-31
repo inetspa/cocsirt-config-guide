@@ -1,5 +1,6 @@
-## วิธีการตรวจสอบสถานะ Container ที่ใช้งานอยู่
+## วิธีการตรวจสอบ Container ที่ใช้งานอยู่
 
+### วิธีการตรวจสอบเฉพาะ Container ที่ใช้งานอยู่เท่านั้น
 เริ่มต้นโดยการใช้คำสั่ง `docker ps` เพื่อตรวจสอบสถานะ Containers ทั้งหมดที่ใช้งานอยู่ทั้งหมด
 ```
 # Docker
@@ -15,6 +16,7 @@ e19123301f31   guacamole/guacd:latest       "/bin/sh -c '/opt/gu…"   4 minutes
 75970a4f39f2   postgres:13.4                "docker-entrypoint.s…"   4 minutes ago   Up 4 minutes                      5432/tcp                 guacamole_database
 ```
 
+### วิธีการตรวจสอบ Container ทั้งหมด
 รันคำสั่ง `docker ps -a` เพื่อตรวจสอบสถานะ Containers ที่ใช้งานและไม่ได้ใช้งานทั้งหมด
 ```
 # Docker
