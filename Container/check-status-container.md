@@ -55,3 +55,17 @@ CONTAINER ID   IMAGE                        COMMAND                  CREATED    
 e19123301f31   guacamole/guacd:latest       "/bin/sh -c '/opt/gu…"   19 minutes ago   Up 19 minutes (healthy)     0.0.0.0:4822->4822/tcp   guacamole_backend     0B (virtual 149MB)
 75970a4f39f2   postgres:13.4                "docker-entrypoint.s…"   19 minutes ago   Up 19 minutes               5432/tcp                 guacamole_database    73B (virtual 351MB)
 ```
+
+#### วิธีการตรวจสอบ Containers กรณีมีไฟล์ docker-compose
+รันคำสั่ง `docker compose ps` หรือ `docker-compose ps` เพื่อตรวจสอบขนาดของ Containers ที่ใช้งาน
+```
+docker compose ps
+```
+ตัวอย่างผลลัพท์
+```
+docker compose ps
+NAME                 IMAGE                        COMMAND                  SERVICE             CREATED             STATUS                    PORTS
+guacamole_backend    guacamole/guacd:latest       "/bin/sh -c '/opt/gu…"   guacd               33 minutes ago      Up 33 minutes (healthy)   0.0.0.0:4822->4822/tcp
+guacamole_database   postgres:13.4                "docker-entrypoint.s…"   postgres            33 minutes ago      Up 33 minutes             5432/tcp
+guacamole_frontend   guacamole/guacamole:latest   "/opt/guacamole/bin/…"   guacamole           33 minutes ago      Up 33 minutes             0.0.0.0:8080->8080/tcp
+```
