@@ -5,12 +5,12 @@
 sudo vi /etc/yum.repos.d/mariadb.repo
 ```
 
-ให้เพิ่ม `#` หน้า baseurl ของเก่า และเพิ่ม baseurl ใหม่
+ให้เพิ่ม `#` หน้า baseurl ของเก่า และเพิ่ม baseurl ใหม่ดังนี้
 ```
 baseurl = http://yum.mariadb.org/10.2/rhel7-amd64
 baseurl = http://archive.mariadb.org/yum/10.2/rhel7-amd64
 ```
-ผลลัพท์
+ตัวอย่าง
 ```
 [MariaDB]
 name = MariaDB
