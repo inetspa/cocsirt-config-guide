@@ -48,3 +48,24 @@ The `web.xml` file that needs to be updated is located in a different location t
 
 #### JBoss 6.
 In order to suppress the X-Powered-By header in JBoss 6, 7, or 7.1, you no longer make changes to `web.xml` files but instead modify the catalina.properties file included with your server instance. Edit the catalina.properties file located in `${jboss.home}/server/${server.instance.name}/deploy/jbossweb.sar/.`  Locate the property named: org.apache.catalina.connector.X_POWERED_BY and set its value to false. Restart the server and you're all set.
+
+#### Remove Server Banner
+วิธีการลบ Server Banner ของ HTTP Header  
+- ไปที่ Path ดังนี้ `$tomcat/conf`
+- แก้ไขไฟล์ `server.xml` ด้วย vi หรือ nano
+- เพิ่ม `Connector port` ดังนี้
+```
+Server =” “
+```
+ตัวอย่าง
+```
+<Connector port="8080" protocol="HTTP/1.1" 
+connectionTimeout="20000" 
+Server =" "
+redirectPort="8443" />
+```
+- ทำการ Save ไฟล์และทำการ Restart Tomcat
+```
+sudo systemctl restart tomcat
+```
+

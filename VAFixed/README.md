@@ -18,6 +18,99 @@ Upgrade Apache ให้เป็น Version ล่าสุด โดยขึ�
 
 **ข้อควรระวัง** สำหรับ Apache version 2.4.x ขึ้นไปเท่านั้น หากเป็น Apache version 2.2.x ให้พิจารณาเรื่องการ Upgrade apache version เนื่องจาก Apache version 2.2.x มีโอกาสไม่รองรับ TLSv1.x และไม่สามารถ Apply security ที่แนะนำได้
 
+**กรณีพบว่า Apache รันบน Docker** ให้ดำเนินการตามขั้นตอนดังนี้ก่อน
+
+1.ค้นหาไฟล์ `docker-compose.yml` โดยใช้คำสั่ง 
+```
+docker inspect <container-id> | grep com.docker
+```
+ปล.วิธีค้นหา `container-id` ใช้คำสั่ง `docker ps`
+
+หรือสามารถค้นหาไฟล์ `docker-compose.yml` ด้วยการค้นหาไฟล์ในระบบดังนี้
+```
+find / -name "docker-compose.yml"
+```
+
+ตรวจสอบว่าไฟล์ `docker-compose.yml` นั้นตรงกับ Container เป้าหมายเราหรือไม่ด้วยคำสั่ง โดยชื่อและพอร์ต จะต้องตรงกันดังรูป
+```
+docker-compose ps 
+```
+หรือ
+```
+docker compose ps
+```
+ตัวอย่างการค้นหาดังรูป
+![va_docker01.jpg](./assets/va_docker01.jpg)
+
+**ให้ `cd` มาที่ Path ที่อยู่ของ `docker-compose.yml`** 
+
+ถ้าไม่พบไฟล์ `docker-compose.yml` หรือลูกค้าใช้วิธี Build Container ด้วยคำสั่ง `docker run` **ให้หยุดดำเนินการ** และแนะนำให้ลูกค้า Convert `docker run` เป็น `docker-compose.yml` ก่อน หรือแนะนำให้ทำการ Hardening ที่ `Dockerfile` แทนเป็นต้น
+
+
+2.ตรวจสอบต่ำแหน่งและชื่อไฟล์คอนฟิก โดยการ `Shell` เข้าไปใน Container ด้วยคำสั่ง
+```
+docker exec -it <container-id> /bin/bash
+```
+
+ค้นหาไฟล์ด้วยคำสั่ง
+```
+find / -name "apache2.conf"
+```
+หรือ
+```
+find / -name "httpd.conf"
+```
+
+ปล.โดยส่วนใหญ่แล้วจะอยู่ที่ Patch `/etc/apache2/apache2.conf`
+
+![va_docker02.jpg](./assets/va_docker02.jpg)
+
+เมื่อพบไฟล์คอนฟิกแล้วให้ออกจาก `Shell` container ด้วยคำสั่ง `exit` จากนั้นให้ Copy ไฟล์คอนฟิกจากใน Container ออกมาด้วยคำสั่ง
+```
+docker cp <container-id>:<path-to-file> .
+```
+เช่น
+```
+docker cp <container-id>:/etc/apache2/apache2.conf .
+```
+
+![va_docker03.jpg](./assets/va_docker03.jpg)
+
+3.ทำการ `Hardening` Version ของ Apache ด้วยการแก้ไขไฟล์คอนฟิก `apache2.conf` หรือ `httpd.conf`
+```apache
+# Hide version for security reason
+ServerTokens Prod
+ServerSignature Off
+```
+
+ทำการ `mount` ไฟล์คอนฟิกกลับเข้า Container ด้วยการเพ่ิมบรรทัดในไฟล์ `docker-compose.yml`
+```apache
+.
+.
+volumes:
+    - ./apache2.conf:/etc/apache2/apache2.conf
+.
+.
+.
+```
+![va_docker04.jpg](./assets/va_docker04.jpg)
+
+ทำการ Rebuild Container ใหม่โดยใช้คำสั่ง
+```
+docker-compose down
+```
+ตามด้วย
+```
+docker-compose up -d
+```
+ตรวจสอบ Status จะต้องเป็น `Up`
+```
+docker-compose ps
+```
+
+
+
+**กรณีติดตั้ง Web Server บน Server ตรงๆ**
 1. เพิ่ม config เพื่อปิดไม่ให้แสดง version ของ httpd ในไฟล์ `/etc/httpd/conf/httpd.conf`
 ```apache
 # Hide version for security reason
