@@ -19,6 +19,7 @@ Upgrade Apache ให้เป็น Version ล่าสุด โดยขึ�
 **ข้อควรระวัง** สำหรับ Apache version 2.4.x ขึ้นไปเท่านั้น หากเป็น Apache version 2.2.x ให้พิจารณาเรื่องการ Upgrade apache version เนื่องจาก Apache version 2.2.x มีโอกาสไม่รองรับ TLSv1.x และไม่สามารถ Apply security ที่แนะนำได้
 
 **กรณีพบว่า Apache รันบน Docker** ให้ดำเนินการตามขั้นตอนดังนี้ก่อน
+
 1.ค้นหาไฟล์ `docker-compose.yml` โดยใช้คำสั่ง 
 ```
 docker inspect <container-id> | grep com.docker
