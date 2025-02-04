@@ -24,7 +24,7 @@ Upgrade Apache ให้เป็น Version ล่าสุด โดยขึ�
 ```
 docker inspect <container-id> | grep com.docker
 ```
-ปล.วิธีค้นหา <container-id> ใช้คำสั่ง `docker ps`
+ปล.วิธีค้นหา `container-id` ใช้คำสั่ง `docker ps`
 
 หรือสามารถค้นหาไฟล์ `docker-compose.yml` ด้วยการค้นหาไฟล์ในระบบดังนี้
 ```
